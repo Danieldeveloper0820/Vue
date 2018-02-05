@@ -22,8 +22,8 @@ Route::get('/Test', function(){
 
 		'User'=>[
 
-		'First_name'=>'Daniel',
-		'Last_name'=>'Lopez'
+		'username'=>'Daniel',
+		'password'=>'Lopez'
 
 
 		]
