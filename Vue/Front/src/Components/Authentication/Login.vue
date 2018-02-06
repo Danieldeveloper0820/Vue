@@ -1,29 +1,29 @@
 <template>
 
 
-<div class="row">
+	<div class="row">
 
-	<div class="col-md-6 col-md-offset-3">
-		<div class="panel panel-default">
-		<h3>Login Form</h3>
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+				<h3>Login Form</h3>
 
-		<div class="panel-body">
-			<div class="form-group">
-				<input v-model="Email" class="form-control" type="email" placeholder="Email">
+				<div class="panel-body">
+					<div class="form-group">
+						<input v-model="Email" class="form-control" type="email" placeholder="Email">
+					</div>
+
+					<div class="form-group">
+						<input v-model="Password" class="form-control" type="text" placeholder="Password">
+					</div>
+
+					<button @click="Login" class="btn btn-success"> Login</button>
+
+				</div>
 			</div>
-
-			<div class="form-group">
-				<input v-model="Password" class="form-control" type="text" placeholder="Password">
-			</div>
-
-			<button @click="Login" class="btn btn-success"> Login</button>
-
 		</div>
+
+
 	</div>
-</div>
-
-
-</div>
 	
 
 </template>
@@ -52,7 +52,9 @@
 
 			this.$http.post("http://localhost:8000/oauth/token", data) //Hacemos la comunicacion entre Vue y laravel
 			.then(Response => {
-				console.log(Response)
+				this.$auth.setToken(Response.body.access_token, Response.body.expires_in+Date.now())
+				this.$router.push("/Feed")
+
 			})
 		}
 	}
